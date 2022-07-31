@@ -19,7 +19,7 @@ const Layout = () => {
       </Row>
       <Row>
         <Col>
-          <KeyboardPanel></KeyboardPanel>
+          <KeyboardPanel />
         </Col>
         <Col>
           <InfoPanel />

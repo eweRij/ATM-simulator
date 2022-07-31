@@ -1,32 +1,14 @@
 import Button from "react-bootstrap/Button";
-import { useDispatch } from "react-redux";
-
-import { AppDispatch } from "../store/store";
-import {
-  setScreenAmount,
-  deleteScreenAmount,
-  clearScreenAmount,
-} from "../store/features/moneyAmountSlice";
 
 interface KeyboardButtonProps {
   label: string;
-  value: number;
+  handleClick: (label: string) => void;
 }
 
-const KeyboardButton = ({ label, value }: KeyboardButtonProps) => {
-  const dispatch: AppDispatch = useDispatch();
-  const handleClick = () => {
-    if (label === "DEL") {
-      dispatch(deleteScreenAmount());
-    } else if (label === "CLEAR") {
-      dispatch(clearScreenAmount());
-    } else {
-      dispatch(setScreenAmount(label));
-    }
-  };
+const KeyboardButton = ({ label, handleClick }: KeyboardButtonProps) => {
   return (
     <Button
-      onClick={() => handleClick()}
+      onClick={() => handleClick(label)}
       variant={isNaN(Number(label)) ? "danger" : "secondary"}
     >
       {label}

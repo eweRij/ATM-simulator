@@ -3,29 +3,36 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { useDispatch, useSelector } from "react-redux";
 
-import { actionsButtonsData, keyboardButtonsData } from "../types/buttons";
+import { actionsButtonsData, keyboardButtonsData } from "../helpers/buttons";
 import {
   clearScreenAmount,
   setLastDeposit,
   setLastWithdrawal,
   withdrawMoney,
   depositMoney,
+  deleteScreenAmount,
+  setScreenAmount,
 } from "../store/features/moneyAmountSlice";
 import ATMscreen from "./ATMscreen";
 import KeyboardButton from "./KeyboardButton";
 import { AppDispatch, RootState } from "../store/store";
 
-const KeyboradPanel: React.FC = () => {
+const KeyboardPanel: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
   const screenAmount = Number(
     useSelector((state: RootState) => state.moneyAmount.screenAmount)
   );
-  const totalAmount = useSelector(
-    (state: RootState) => state.moneyAmount.totalAmount
-  );
-
-  const handleActionButton = (name: string): void => {
+  const keyboardHandleClick = (label: string): void => {
+    if (label === "DEL") {
+      dispatch(deleteScreenAmount());
+    } else if (label === "CLEAR") {
+      dispatch(clearScreenAmount());
+    } else {
+      dispatch(setScreenAmount(label));
+    }
+  };
+  const actionsHandleClick = (name: string): void => {
     if (name === "WITHDRAW") {
       dispatch(withdrawMoney(screenAmount));
       dispatch(setLastWithdrawal(screenAmount));
@@ -35,19 +42,22 @@ const KeyboradPanel: React.FC = () => {
     }
     dispatch(clearScreenAmount());
   };
-  console.log(totalAmount);
   return (
     <Card bg="light" style={{ width: "18rem" }} className="mb-2">
       <Card.Header>
-        <ATMscreen></ATMscreen>
+        <ATMscreen screenAmount={screenAmount}></ATMscreen>
       </Card.Header>
       <Card.Body>
         <Card.Title>
           <div className="keyboardButton-container">
             {keyboardButtonsData.map((button, id) => {
-              const { name, value } = button;
+              const { name } = button;
               return (
-                <KeyboardButton key={id + name} label={name} value={value} />
+                <KeyboardButton
+                  key={id + name}
+                  label={name}
+                  handleClick={keyboardHandleClick}
+                />
               );
             })}
           </div>
@@ -60,7 +70,7 @@ const KeyboradPanel: React.FC = () => {
             <Button
               key={id + name}
               variant={variant}
-              onClick={() => handleActionButton(name)}
+              onClick={() => actionsHandleClick(name)}
             >
               {name}
             </Button>
@@ -71,4 +81,4 @@ const KeyboradPanel: React.FC = () => {
   );
 };
 
-export default KeyboradPanel;
+export default KeyboardPanel;

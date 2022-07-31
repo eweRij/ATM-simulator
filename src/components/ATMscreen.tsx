@@ -1,11 +1,8 @@
-import React from "react";
-import { useSelector } from "react-redux";
+interface ATMscreenProps {
+  screenAmount: number;
+}
 
-import { RootState } from "../store/store";
-const ATMscreen = () => {
-  const screenAmount = useSelector(
-    (state: RootState) => state.moneyAmount.screenAmount
-  );
+const ATMscreen = ({ screenAmount }: ATMscreenProps) => {
   return (
     <div
       style={{
