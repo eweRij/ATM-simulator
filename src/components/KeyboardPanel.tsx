@@ -1,9 +1,11 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 import { useDispatch, useSelector } from "react-redux";
 
-import { actionsButtonsData, keyboardButtonsData } from "../helpers/buttons";
+import {
+  actionsKeyboardButtonssData,
+  keyboardButtonsData,
+} from "../helpers/buttons";
 import {
   clearScreenAmount,
   setLastDeposit,
@@ -17,11 +19,17 @@ import ATMscreen from "./ATMscreen";
 import KeyboardButton from "./KeyboardButton";
 import { AppDispatch, RootState } from "../store/store";
 
-const KeyboardPanel: React.FC = () => {
+interface KeyboardPanelProps {
+  handleShow: (total: number, withdraw: number) => void;
+}
+const KeyboardPanel: React.FC<KeyboardPanelProps> = ({ handleShow }) => {
   const dispatch: AppDispatch = useDispatch();
 
   const screenAmount = Number(
     useSelector((state: RootState) => state.moneyAmount.screenAmount)
+  );
+  const totalAmount = Number(
+    useSelector((state: RootState) => state.moneyAmount.totalAmount)
   );
   const keyboardHandleClick = (label: string): void => {
     if (label === "DEL") {
@@ -33,7 +41,10 @@ const KeyboardPanel: React.FC = () => {
     }
   };
   const actionsHandleClick = (name: string): void => {
-    if (name === "WITHDRAW") {
+    if (name === "WITHDRAW" && totalAmount < screenAmount) {
+      handleShow(totalAmount, screenAmount);
+    } else if (name === "WITHDRAW") {
+      handleShow(totalAmount, screenAmount);
       dispatch(withdrawMoney(screenAmount));
       dispatch(setLastWithdrawal(screenAmount));
     } else {
@@ -64,16 +75,15 @@ const KeyboardPanel: React.FC = () => {
         </Card.Title>
       </Card.Body>
       <Card.Footer>
-        {actionsButtonsData.map((button, id) => {
+        {actionsKeyboardButtonssData.map((button, id) => {
           const { name, variant } = button;
           return (
-            <Button
+            <KeyboardButton
               key={id + name}
+              label={name}
               variant={variant}
-              onClick={() => actionsHandleClick(name)}
-            >
-              {name}
-            </Button>
+              handleClick={actionsHandleClick}
+            />
           );
         })}
       </Card.Footer>

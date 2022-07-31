@@ -2,7 +2,7 @@ import Card from "react-bootstrap/Card";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 
-const InfoPanel = () => {
+const InfoPanel: React.FC = () => {
   const totalAmount = useSelector(
     (state: RootState) => state.moneyAmount.totalAmount
   );

@@ -1,6 +1,6 @@
-import { ActionsButtonsData, KeyboardButtonsData } from "../types/buttons";
+import { ButtonsData } from "../types/buttons";
 
-export const keyboardButtonsData: KeyboardButtonsData[] = [
+export const keyboardButtonsData: ButtonsData[] = [
   { name: "1" },
   { name: "2" },
   { name: "3" },
@@ -15,7 +15,7 @@ export const keyboardButtonsData: KeyboardButtonsData[] = [
   { name: "CLEAR" },
 ];
 
-export const actionsButtonsData: ActionsButtonsData[] = [
+export const actionsKeyboardButtonssData: ButtonsData[] = [
   {
     name: "WITHDRAW",
     variant: "primary",
@@ -25,3 +25,4 @@ export const actionsButtonsData: ActionsButtonsData[] = [
     variant: "success",
   },
 ];
+

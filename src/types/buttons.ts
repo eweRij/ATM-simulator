@@ -1,7 +1,4 @@
-export interface KeyboardButtonsData {
+export interface ButtonsData {
   name: string;
-}
-export interface ActionsButtonsData {
-  name: string;
-  variant: string;
+  variant?: string;
 }

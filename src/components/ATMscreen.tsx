@@ -2,7 +2,7 @@ interface ATMscreenProps {
   screenAmount: number;
 }
 
-const ATMscreen = ({ screenAmount }: ATMscreenProps) => {
+const ATMscreen: React.FC<ATMscreenProps> = ({ screenAmount }) => {
   return (
     <div
       style={{
