@@ -3,14 +3,11 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  actionsButtonsData,
-  keyboardButtonsData,
-  useAtmDispatcher,
-} from "../types/buttons";
+import { actionsButtonsData, keyboardButtonsData } from "../types/buttons";
 import {
   clearScreenAmount,
-  setScreenAmount,
+  setLastDeposit,
+  setLastWithdrawal,
   withdrawMoney,
   depositMoney,
 } from "../store/features/moneyAmountSlice";
@@ -19,7 +16,6 @@ import KeyboardButton from "./KeyboardButton";
 import { AppDispatch, RootState } from "../store/store";
 
 const KeyboradPanel: React.FC = () => {
-  const dispatchActionButton = useAtmDispatcher();
   const dispatch: AppDispatch = useDispatch();
 
   const screenAmount = Number(
@@ -31,9 +27,11 @@ const KeyboradPanel: React.FC = () => {
 
   const handleActionButton = (name: string): void => {
     if (name === "WITHDRAW") {
-      dispatchActionButton(withdrawMoney(screenAmount));
+      dispatch(withdrawMoney(screenAmount));
+      dispatch(setLastWithdrawal(screenAmount));
     } else {
-      dispatchActionButton(depositMoney(screenAmount));
+      dispatch(depositMoney(screenAmount));
+      dispatch(setLastDeposit(screenAmount));
     }
     dispatch(clearScreenAmount());
   };

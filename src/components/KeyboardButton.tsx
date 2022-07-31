@@ -1,9 +1,12 @@
-import React from "react";
 import Button from "react-bootstrap/Button";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { AppDispatch } from "../store/store";
-import { setScreenAmount } from "../store/features/moneyAmountSlice";
+import {
+  setScreenAmount,
+  deleteScreenAmount,
+  clearScreenAmount,
+} from "../store/features/moneyAmountSlice";
 
 interface KeyboardButtonProps {
   label: string;
@@ -12,10 +15,18 @@ interface KeyboardButtonProps {
 
 const KeyboardButton = ({ label, value }: KeyboardButtonProps) => {
   const dispatch: AppDispatch = useDispatch();
-
+  const handleClick = () => {
+    if (label === "DEL") {
+      dispatch(deleteScreenAmount());
+    } else if (label === "CLEAR") {
+      dispatch(clearScreenAmount());
+    } else {
+      dispatch(setScreenAmount(label));
+    }
+  };
   return (
     <Button
-      onClick={() => dispatch(setScreenAmount(label))}
+      onClick={() => handleClick()}
       variant={isNaN(Number(label)) ? "danger" : "secondary"}
     >
       {label}

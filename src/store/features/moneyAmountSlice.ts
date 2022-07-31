@@ -4,7 +4,7 @@ import { State } from "../../types/state";
 const initialState: State = {
   screenAmount: "",
   totalAmount: 2000,
-  lastWithdrawn: 0,
+  lastWithdrawal: 0,
   lastDeposit: 0,
 };
 
@@ -21,14 +21,24 @@ const moneyAmountSlice = createSlice({
     depositMoney: (state: State, action: PayloadAction<number>) => {
       return { ...state, totalAmount: state.totalAmount + action.payload };
     },
-    setLastWithdrawn: (state: State, action: PayloadAction<number>) => {
-      return { ...state, lastWithdrawn: action.payload };
+    setLastWithdrawal: (state: State, action: PayloadAction<number>) => {
+      console.log(action.payload);
+      return { ...state, lastWithdrawal: action.payload };
     },
     setLastDeposit: (state: State, action: PayloadAction<number>) => {
       return { ...state, lastDeposit: action.payload };
     },
     clearScreenAmount: (state: State) => {
       return { ...state, screenAmount: "" };
+    },
+    deleteScreenAmount: (state: State) => {
+      return {
+        ...state,
+        screenAmount: state.screenAmount.substring(
+          0,
+          state.screenAmount.length - 1
+        ),
+      };
     },
   },
 });
@@ -37,9 +47,10 @@ export const {
   setScreenAmount,
   withdrawMoney,
   depositMoney,
-  setLastWithdrawn,
+  setLastWithdrawal,
   setLastDeposit,
   clearScreenAmount,
+  deleteScreenAmount,
 } = moneyAmountSlice.actions;
-export const moneyAmountSelector = (state: { store: any }) => state.store;
+
 export default moneyAmountSlice.reducer;

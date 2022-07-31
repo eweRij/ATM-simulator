@@ -1,11 +1,3 @@
-import { ActionCreatorWithPayload, PayloadAction } from "@reduxjs/toolkit";
-import { Dispatch } from "react";
-import { useDispatch } from "react-redux";
-import {
-  withdrawMoney,
-  depositMoney,
-} from "../store/features/moneyAmountSlice";
-import { AppDispatch } from "../store/store";
 
 export interface KeyboardButtonsData {
   name: string;
@@ -15,13 +7,6 @@ export interface ActionsButtonsData {
   name: string;
   variant: string;
 }
-
-export const useAtmDispatcher = (): Dispatch<PayloadAction<number, string>> => {
-  const dispatch = useDispatch();
-  return (action: PayloadAction<number, string>) => {
-    dispatch(action);
-  };
-}; //custom hook
 
 export const keyboardButtonsData: KeyboardButtonsData[] = [
   { name: "1", value: 1 },
