@@ -1,0 +1,25 @@
+@import "../../styles/mixin-variables.scss";
+.infoPanel {
+  width: 100% !important;
+  height: 100%;
+  border-radius: $radius;
+  @include shadow;
+  &-header {
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 10px;
+    height: 20%;
+  }
+  &-title {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+  &-content {
+    margin-top: 40px;
+    font-size: 2rem;
+    text-align: end;
+  }
+  &-footer {
+    font-size: 1.25rem;
+  }
+}

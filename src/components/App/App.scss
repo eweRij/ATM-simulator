@@ -1,0 +1,20 @@
+@import "../../styles/mixin-variables.scss";
+.app {
+  margin-top: 10%;
+  max-width: 700px;
+  position: relative;
+
+  &-navbar div {
+    border-radius: 5% 5% 0 0;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    font-size: 2rem;
+    width: 100%;
+  }
+  &-alert {
+    position: absolute;
+    width: calc(100% - 24px);
+    z-index: 2;
+  }
+}

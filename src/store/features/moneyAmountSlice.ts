@@ -3,7 +3,7 @@ import { State } from "../../types/state";
 
 const initialState: State = {
   screenAmount: "",
-  totalAmount: 2000,
+  totalAmount: 2000000, // :) :)
   lastWithdrawal: 0,
   lastDeposit: 0,
 };
@@ -22,7 +22,6 @@ const moneyAmountSlice = createSlice({
       return { ...state, totalAmount: state.totalAmount + action.payload };
     },
     setLastWithdrawal: (state: State, action: PayloadAction<number>) => {
-      console.log(action.payload);
       return { ...state, lastWithdrawal: action.payload };
     },
     setLastDeposit: (state: State, action: PayloadAction<number>) => {

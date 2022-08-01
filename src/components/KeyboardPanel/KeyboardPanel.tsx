@@ -2,10 +2,11 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import { useDispatch, useSelector } from "react-redux";
 
+import "./KeyboardPanel.scss";
 import {
   actionsKeyboardButtonssData,
   keyboardButtonsData,
-} from "../helpers/buttons";
+} from "../../helpers/buttons";
 import {
   clearScreenAmount,
   setLastDeposit,
@@ -14,10 +15,10 @@ import {
   depositMoney,
   deleteScreenAmount,
   setScreenAmount,
-} from "../store/features/moneyAmountSlice";
-import ATMscreen from "./ATMscreen";
-import KeyboardButton from "./KeyboardButton";
-import { AppDispatch, RootState } from "../store/store";
+} from "../../store/features/moneyAmountSlice";
+import ATMscreen from "../ATMscreen/ATMscreen";
+import KeyboardButton from "../KeyboardButton/KeyboardButton";
+import { AppDispatch, RootState } from "../../store/store";
 
 interface KeyboardPanelProps {
   handleShow: (total: number, withdraw: number) => void;
@@ -54,27 +55,32 @@ const KeyboardPanel: React.FC<KeyboardPanelProps> = ({ handleShow }) => {
     dispatch(clearScreenAmount());
   };
   return (
-    <Card bg="light" style={{ width: "18rem" }} className="mb-2">
+    <Card className="keyboardPanel" bg="light">
       <Card.Header>
         <ATMscreen screenAmount={screenAmount}></ATMscreen>
       </Card.Header>
       <Card.Body>
         <Card.Title>
-          <div className="keyboardButton-container">
+          <div className="keyboardPanel-buttonsContainer">
             {keyboardButtonsData.map((button, id) => {
               const { name } = button;
               return (
                 <KeyboardButton
                   key={id + name}
                   label={name}
+                  className="keyboardPanel-keyboardButton"
+                  setDisabled={
+                    screenAmount.toString().length > 20 ? true : false
+                  }
                   handleClick={keyboardHandleClick}
+               
                 />
               );
             })}
           </div>
         </Card.Title>
       </Card.Body>
-      <Card.Footer>
+      <Card.Footer className="keyboardPanel-actionButtonsContainer">
         {actionsKeyboardButtonssData.map((button, id) => {
           const { name, variant } = button;
           return (
@@ -82,6 +88,7 @@ const KeyboardPanel: React.FC<KeyboardPanelProps> = ({ handleShow }) => {
               key={id + name}
               label={name}
               variant={variant}
+              className="keyboardPanel-actionButton"
               handleClick={actionsHandleClick}
             />
           );

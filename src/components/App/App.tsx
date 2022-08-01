@@ -4,8 +4,9 @@ import { Alert, Navbar } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-import KeyboardPanel from "./KeyboardPanel";
-import InfoPanel from "./InfoPanel";
+import "./App.scss";
+import KeyboardPanel from "../KeyboardPanel/KeyboardPanel";
+import InfoPanel from "../InfoPanel/InfoPanel";
 import { useState } from "react";
 
 const App: React.FC = () => {
@@ -19,25 +20,25 @@ const App: React.FC = () => {
     }
   };
   return (
-    <Container>
+    <Container className="app">
       <Row>
         <Col>
-          <Navbar bg="primary">
-            <Container>
-              <Navbar.Brand href="#">ATM</Navbar.Brand>
-            </Container>
+          <Navbar className="app-navbar" bg="primary">
+            <div>ATM Machine</div>
           </Navbar>
         </Col>
       </Row>
-      <Alert
-        show={isVisible}
-        variant="danger"
-        onClose={() => setIsVisible(false)}
-        transition
-        dismissible
-      >
-        You do not have enough money on your account!
-      </Alert>
+      <div className="app-alert">
+        <Alert
+          show={isVisible}
+          variant="danger"
+          onClose={() => setIsVisible(false)}
+          transition
+          dismissible
+        >
+          You do not have enough money on your account!
+        </Alert>
+      </div>
       <Row>
         <Col>
           <KeyboardPanel handleShow={handleShow} />

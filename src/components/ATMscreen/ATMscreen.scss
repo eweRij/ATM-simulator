@@ -1,0 +1,9 @@
+@import "../../styles/mixin-variables.scss";
+.ATMscreen {
+  padding: 10px;
+  background-color: rgba(13, 110, 253, 0.5);
+  text-align: end;
+  color: grey;
+  font-size: 1.5rem;
+  @include shadow;
+}
