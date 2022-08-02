@@ -8,7 +8,7 @@ import {
   setScreenAmount,
 } from "../store/features/moneyAmountSlice";
 import { AppDispatch } from "../store/store";
-import { handleShowAlert } from "./handleShow";
+import { showHandler } from "./showHandler";
 
 export const keyboardHandler = (label: string, dispatch: any): void => {
   if (label === "DEL") {
@@ -28,9 +28,9 @@ export const actionsHandler = (
   dispatch: AppDispatch
 ): void => {
   if (name === "WITHDRAW" && total < screen) {
-    handleShowAlert(total, screen, setter);
+    showHandler(total, screen, setter);
   } else if (name === "WITHDRAW") {
-    handleShowAlert(total, screen, setter);
+    showHandler(total, screen, setter);
     dispatch(withdrawMoney(screen));
     dispatch(setLastWithdrawal(screen));
   } else {

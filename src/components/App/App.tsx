@@ -1,24 +1,29 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import Container from "react-bootstrap/Container";
-import { Alert, Navbar } from "react-bootstrap";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { useState } from "react";
+import { Alert, Navbar, Container, Row, Col } from "react-bootstrap";
 
 import "./App.scss";
 import KeyboardPanel from "../KeyboardPanel/KeyboardPanel";
 import InfoPanel from "../InfoPanel/InfoPanel";
-import { useState } from "react";
+import { RootState } from "../../store/store";
+import { useSelector } from "react-redux";
 
 const App: React.FC = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
-  // const handleShow = (total: number, withdraw: number): void => {
-  //   if (total < withdraw) {
-  //     setIsVisible(true);
-  //   } else {
-  //     setIsVisible(false);
-  //   }
-  // };
+  const totalAmount = useSelector(
+    (state: RootState) => state.moneyAmount.totalAmount
+  );
+  const lastWithdrawal = useSelector(
+    (state: RootState) => state.moneyAmount.lastWithdrawal
+  );
+  const lastDeposit = useSelector(
+    (state: RootState) => state.moneyAmount.lastDeposit
+  );
+
+  const screenAmount = useSelector(
+    (state: RootState) => state.moneyAmount.screenAmount
+  );
   return (
     <Container className="app">
       <Row>
@@ -41,10 +46,18 @@ const App: React.FC = () => {
       </div>
       <Row>
         <Col>
-          <KeyboardPanel setter={setIsVisible} />
+          <KeyboardPanel
+            screenAmount={Number(screenAmount)}
+            totalAmount={totalAmount}
+            setter={setIsVisible}
+          />
         </Col>
         <Col>
-          <InfoPanel />
+          <InfoPanel
+            totalAmount={totalAmount}
+            lastWithdrawal={lastWithdrawal}
+            lastDeposit={lastDeposit}
+          />
         </Col>
       </Row>
     </Container>

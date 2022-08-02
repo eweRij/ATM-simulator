@@ -1,4 +1,4 @@
-export const handleShowAlert = (
+export const showHandler = (
   total: number,
   withdraw: number,
   setter: React.Dispatch<React.SetStateAction<boolean>>

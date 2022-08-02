@@ -1,19 +1,13 @@
 import Card from "react-bootstrap/Card";
-import { useSelector } from "react-redux";
 
 import "./InfoPanel.scss";
-import { RootState } from "../../store/store";
+import { InfoPanelProps } from "./InfoPanel.types";
 
-const InfoPanel: React.FC = () => {
-  const totalAmount = useSelector(
-    (state: RootState) => state.moneyAmount.totalAmount
-  );
-  const lastWithdrawal = useSelector(
-    (state: RootState) => state.moneyAmount.lastWithdrawal
-  );
-  const lastDeposit = useSelector(
-    (state: RootState) => state.moneyAmount.lastDeposit
-  );
+const InfoPanel: React.FC<InfoPanelProps> = ({
+  totalAmount,
+  lastWithdrawal,
+  lastDeposit,
+}) => {
   return (
     <Card className="infoPanel" bg="light">
       <Card.Header>

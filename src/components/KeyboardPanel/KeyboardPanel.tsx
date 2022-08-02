@@ -1,6 +1,6 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import Card from "react-bootstrap/Card";
-import { useDispatch, useSelector } from "react-redux";
 
 import "./KeyboardPanel.scss";
 import {
@@ -9,7 +9,7 @@ import {
 } from "../../store/initialState";
 import ATMscreen from "../ATMscreen/ATMscreen";
 import KeyboardButton from "../KeyboardButton/KeyboardButton";
-import { AppDispatch, RootState } from "../../store/store";
+import { AppDispatch } from "../../store/store";
 import { KeyboardPanelProps } from "./KeyboardPanel.types";
 import {
   keyboardHandler,
@@ -18,15 +18,12 @@ import {
   checkVariant,
 } from "../../helpers/buttonsHandlers";
 
-const KeyboardPanel: React.FC<KeyboardPanelProps> = ({ setter }) => {
+const KeyboardPanel: React.FC<KeyboardPanelProps> = ({
+  screenAmount,
+  totalAmount,
+  setter,
+}) => {
   const dispatch: AppDispatch = useDispatch();
-
-  const screenAmount = Number(
-    useSelector((state: RootState) => state.moneyAmount.screenAmount)
-  );
-  const totalAmount = Number(
-    useSelector((state: RootState) => state.moneyAmount.totalAmount)
-  );
 
   return (
     <Card className="keyboardPanel" bg="light">
