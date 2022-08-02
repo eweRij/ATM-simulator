@@ -1,6 +1,14 @@
+import { State } from "../types/state";
 import { ButtonsData } from "../types/buttons";
 
-export const keyboardButtonsData: ButtonsData[] = [
+export const initialAppState: State = {
+  screenAmount: "",
+  totalAmount: 2000000, // :) :)
+  lastWithdrawal: 0,
+  lastDeposit: 0,
+};
+
+export const keyboardButtonsState: ButtonsData[] = [
   { name: "1" },
   { name: "2" },
   { name: "3" },
@@ -15,7 +23,7 @@ export const keyboardButtonsData: ButtonsData[] = [
   { name: "CLEAR" },
 ];
 
-export const actionsKeyboardButtonssData: ButtonsData[] = [
+export const actionsKeyboardButtonsState: ButtonsData[] = [
   {
     name: "WITHDRAW",
     variant: "primary",
@@ -25,4 +33,3 @@ export const actionsKeyboardButtonssData: ButtonsData[] = [
     variant: "success",
   },
 ];
-

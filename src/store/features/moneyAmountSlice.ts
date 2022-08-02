@@ -1,12 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { State } from "../../types/state";
-
-const initialState: State = {
-  screenAmount: "",
-  totalAmount: 2000000, // :) :)
-  lastWithdrawal: 0,
-  lastDeposit: 0,
-};
+import { initialAppState as initialState } from "../initialState";
 
 const moneyAmountSlice = createSlice({
   name: "moneyAmount",

@@ -12,13 +12,13 @@ import { useState } from "react";
 const App: React.FC = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
-  const handleShow = (total: number, withdraw: number): void => {
-    if (total < withdraw) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
-    }
-  };
+  // const handleShow = (total: number, withdraw: number): void => {
+  //   if (total < withdraw) {
+  //     setIsVisible(true);
+  //   } else {
+  //     setIsVisible(false);
+  //   }
+  // };
   return (
     <Container className="app">
       <Row>
@@ -41,7 +41,7 @@ const App: React.FC = () => {
       </div>
       <Row>
         <Col>
-          <KeyboardPanel handleShow={handleShow} />
+          <KeyboardPanel setter={setIsVisible} />
         </Col>
         <Col>
           <InfoPanel />

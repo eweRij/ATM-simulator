@@ -1,39 +1,23 @@
 import Button from "react-bootstrap/Button";
-
-interface KeyboardButtonProps {
-  label: string;
-  variant?: string;
-  className: string;
-  setDisabled?: boolean;
-  handleClick: (label: string) => void;
-}
+// import { checkDisabled, checkVariant } from "../../helpers/buttonsHandlers";
+import { KeyboardButtonProps } from "./KeyboardButton.types";
 
 const KeyboardButton: React.FC<KeyboardButtonProps> = ({
   label,
   variant,
   className,
-  setDisabled,
-  handleClick,
+  screenAmount,
+  handleButton,
+  checkVariant,
+  checkDisabled,
 }) => {
-  const checkVariant = (): string => {
-    if (variant) {
-      return variant;
-    }
-    return isNaN(Number(label)) ? "danger" : "secondary";
-  };
-  const checkDisabled = (): boolean | undefined => {
-    if (isNaN(Number(label))) {
-      return false;
-    } else {
-      return setDisabled;
-    }
-  };
+  console.log(label);
   return (
     <Button
       className={className}
-      onClick={() => handleClick(label)}
-      variant={checkVariant()}
-      disabled={checkDisabled()}
+      onClick={() => handleButton(label)}
+      variant={checkVariant && checkVariant(variant, label)}
+      disabled={checkDisabled && checkDisabled(label, screenAmount)}
     >
       {label}
     </Button>

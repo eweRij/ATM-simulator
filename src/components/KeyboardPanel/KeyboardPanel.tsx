@@ -4,26 +4,21 @@ import { useDispatch, useSelector } from "react-redux";
 
 import "./KeyboardPanel.scss";
 import {
-  actionsKeyboardButtonssData,
-  keyboardButtonsData,
-} from "../../helpers/buttons";
-import {
-  clearScreenAmount,
-  setLastDeposit,
-  setLastWithdrawal,
-  withdrawMoney,
-  depositMoney,
-  deleteScreenAmount,
-  setScreenAmount,
-} from "../../store/features/moneyAmountSlice";
+  actionsKeyboardButtonsState,
+  keyboardButtonsState,
+} from "../../store/initialState";
 import ATMscreen from "../ATMscreen/ATMscreen";
 import KeyboardButton from "../KeyboardButton/KeyboardButton";
 import { AppDispatch, RootState } from "../../store/store";
+import { KeyboardPanelProps } from "./KeyboardPanel.types";
+import {
+  keyboardHandler,
+  actionsHandler,
+  checkDisabled,
+  checkVariant,
+} from "../../helpers/buttonsHandlers";
 
-interface KeyboardPanelProps {
-  handleShow: (total: number, withdraw: number) => void;
-}
-const KeyboardPanel: React.FC<KeyboardPanelProps> = ({ handleShow }) => {
+const KeyboardPanel: React.FC<KeyboardPanelProps> = ({ setter }) => {
   const dispatch: AppDispatch = useDispatch();
 
   const screenAmount = Number(
@@ -32,28 +27,7 @@ const KeyboardPanel: React.FC<KeyboardPanelProps> = ({ handleShow }) => {
   const totalAmount = Number(
     useSelector((state: RootState) => state.moneyAmount.totalAmount)
   );
-  const keyboardHandleClick = (label: string): void => {
-    if (label === "DEL") {
-      dispatch(deleteScreenAmount());
-    } else if (label === "CLEAR") {
-      dispatch(clearScreenAmount());
-    } else {
-      dispatch(setScreenAmount(label));
-    }
-  };
-  const actionsHandleClick = (name: string): void => {
-    if (name === "WITHDRAW" && totalAmount < screenAmount) {
-      handleShow(totalAmount, screenAmount);
-    } else if (name === "WITHDRAW") {
-      handleShow(totalAmount, screenAmount);
-      dispatch(withdrawMoney(screenAmount));
-      dispatch(setLastWithdrawal(screenAmount));
-    } else {
-      dispatch(depositMoney(screenAmount));
-      dispatch(setLastDeposit(screenAmount));
-    }
-    dispatch(clearScreenAmount());
-  };
+
   return (
     <Card className="keyboardPanel" bg="light">
       <Card.Header>
@@ -62,18 +36,17 @@ const KeyboardPanel: React.FC<KeyboardPanelProps> = ({ handleShow }) => {
       <Card.Body>
         <Card.Title>
           <div className="keyboardPanel-buttonsContainer">
-            {keyboardButtonsData.map((button, id) => {
+            {keyboardButtonsState.map((button, id) => {
               const { name } = button;
               return (
                 <KeyboardButton
                   key={id + name}
                   label={name}
                   className="keyboardPanel-keyboardButton"
-                  setDisabled={
-                    screenAmount.toString().length > 20 ? true : false
-                  }
-                  handleClick={keyboardHandleClick}
-               
+                  screenAmount={screenAmount}
+                  handleButton={() => keyboardHandler(name, dispatch)}
+                  checkVariant={checkVariant}
+                  checkDisabled={() => checkDisabled(name, screenAmount)}
                 />
               );
             })}
@@ -81,7 +54,7 @@ const KeyboardPanel: React.FC<KeyboardPanelProps> = ({ handleShow }) => {
         </Card.Title>
       </Card.Body>
       <Card.Footer className="keyboardPanel-actionButtonsContainer">
-        {actionsKeyboardButtonssData.map((button, id) => {
+        {actionsKeyboardButtonsState.map((button, id) => {
           const { name, variant } = button;
           return (
             <KeyboardButton
@@ -89,7 +62,17 @@ const KeyboardPanel: React.FC<KeyboardPanelProps> = ({ handleShow }) => {
               label={name}
               variant={variant}
               className="keyboardPanel-actionButton"
-              handleClick={actionsHandleClick}
+              screenAmount={screenAmount}
+              handleButton={() => {
+                actionsHandler(
+                  name,
+                  totalAmount,
+                  screenAmount,
+                  setter,
+                  dispatch
+                );
+              }}
+              checkVariant={checkVariant}
             />
           );
         })}
