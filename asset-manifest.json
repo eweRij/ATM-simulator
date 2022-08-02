@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/eweRij/ATM-simulator/static/css/main.1421fd5d.css",
-    "main.js": "/eweRij/ATM-simulator/static/js/main.c26c8f9d.js",
-    "static/js/787.28cb0dcd.chunk.js": "/eweRij/ATM-simulator/static/js/787.28cb0dcd.chunk.js",
-    "index.html": "/eweRij/ATM-simulator/index.html",
-    "main.1421fd5d.css.map": "/eweRij/ATM-simulator/static/css/main.1421fd5d.css.map",
-    "main.c26c8f9d.js.map": "/eweRij/ATM-simulator/static/js/main.c26c8f9d.js.map",
-    "787.28cb0dcd.chunk.js.map": "/eweRij/ATM-simulator/static/js/787.28cb0dcd.chunk.js.map"
+    "main.css": "/ATM-simulator/static/css/main.1421fd5d.css",
+    "main.js": "/ATM-simulator/static/js/main.e48b4dce.js",
+    "static/js/787.28cb0dcd.chunk.js": "/ATM-simulator/static/js/787.28cb0dcd.chunk.js",
+    "index.html": "/ATM-simulator/index.html",
+    "main.1421fd5d.css.map": "/ATM-simulator/static/css/main.1421fd5d.css.map",
+    "main.e48b4dce.js.map": "/ATM-simulator/static/js/main.e48b4dce.js.map",
+    "787.28cb0dcd.chunk.js.map": "/ATM-simulator/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1421fd5d.css",
-    "static/js/main.c26c8f9d.js"
+    "static/js/main.e48b4dce.js"
   ]
 }
