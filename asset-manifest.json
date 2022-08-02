@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/ATM-simulator/static/css/main.e09de43e.css",
-    "main.js": "/ATM-simulator/static/js/main.e48b4dce.js",
+    "main.js": "/ATM-simulator/static/js/main.2b0ff88a.js",
     "static/js/787.28cb0dcd.chunk.js": "/ATM-simulator/static/js/787.28cb0dcd.chunk.js",
     "index.html": "/ATM-simulator/index.html",
     "main.e09de43e.css.map": "/ATM-simulator/static/css/main.e09de43e.css.map",
-    "main.e48b4dce.js.map": "/ATM-simulator/static/js/main.e48b4dce.js.map",
+    "main.2b0ff88a.js.map": "/ATM-simulator/static/js/main.2b0ff88a.js.map",
     "787.28cb0dcd.chunk.js.map": "/ATM-simulator/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e09de43e.css",
-    "static/js/main.e48b4dce.js"
+    "static/js/main.2b0ff88a.js"
   ]
 }
