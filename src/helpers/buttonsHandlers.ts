@@ -51,12 +51,12 @@ export const checkVariant = (
 };
 
 export const checkDisabled = (label: string, screenAmount: number): boolean => {
-  if (screenAmount.toString().length > 20 ? true : false) {
-    if (isNaN(Number(label))) {
-      return false;
-    } else {
-      return true;
-    }
+  if (
+    label !== "DEL" &&
+    label !== "CLEAR" &&
+    screenAmount.toString().length >= 20
+  ) {
+    return true;
   }
   return false;
 };
